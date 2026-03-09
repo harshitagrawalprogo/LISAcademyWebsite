@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
-import { Button } from "@/components/ui/button";
 import { Users, GraduationCap, BookOpen, Microscope, Quote, ArrowRight, UserPlus, MessageCircle, Star } from "lucide-react";
 
 const memberGroups = [
@@ -41,24 +40,24 @@ export default function Community() {
       <PageHeader tag="Community" title="Join Our Network" description="Connect with a thriving ecosystem of LIS professionals, researchers, and learners." />
 
       {/* Member Groups */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-[#0d1b3e]">
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="text-center mb-14">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">Our Ecosystem</h2>
-              <p className="text-muted-foreground mt-2">A diverse community united by a passion for information science.</p>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">Our Ecosystem</h2>
+              <p className="text-white/50 mt-2">A diverse community united by a passion for information science.</p>
             </div>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {memberGroups.map((group, i) => (
               <FadeIn key={group.label} delay={i * 0.1}>
-                <div className="p-6 rounded-xl bg-card border border-border hover-lift text-center h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-accent mx-auto flex items-center justify-center mb-4">
-                    <group.icon className="text-primary" size={24} />
+                <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:-translate-y-1 transition-all duration-300 text-center h-full">
+                  <div className="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center mb-4" style={{ background: "rgba(201,168,76,0.15)" }}>
+                    <group.icon style={{ color: "#c9a84c" }} size={24} />
                   </div>
-                  <div className="text-2xl font-serif font-bold text-foreground mb-1">{group.count}</div>
-                  <div className="text-secondary font-semibold text-sm mb-2">{group.label}</div>
-                  <p className="text-xs text-muted-foreground">{group.description}</p>
+                  <div className="text-2xl font-serif font-bold text-white mb-1">{group.count}</div>
+                  <div className="text-sm font-semibold mb-2" style={{ color: "#c9a84c" }}>{group.label}</div>
+                  <p className="text-xs text-white/50">{group.description}</p>
                 </div>
               </FadeIn>
             ))}
@@ -67,53 +66,56 @@ export default function Community() {
       </section>
 
       {/* Membership Benefits */}
-      <section className="section-padding bg-muted/50">
+      <section className="section-padding" style={{ background: "#091529" }}>
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="text-center mb-14">
-              <span className="text-secondary text-sm font-semibold tracking-widest uppercase mb-3 block">Membership</span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">Why Join?</h2>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase border border-[#c9a84c]/40 text-[#c9a84c] bg-[#c9a84c]/10 mb-4">Membership</span>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">Why Join?</h2>
             </div>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, i) => (
               <FadeIn key={benefit.title} delay={i * 0.1}>
-                <div className="p-6 rounded-xl bg-card border border-border h-full">
-                  <benefit.icon className="text-secondary mb-4" size={24} />
-                  <h3 className="font-serif text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
+                <div className="p-6 rounded-xl border border-white/10 bg-white/5 h-full">
+                  <benefit.icon style={{ color: "#c9a84c" }} className="mb-4" size={24} />
+                  <h3 className="font-serif text-lg font-semibold text-white mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-white/50 leading-relaxed">{benefit.description}</p>
                 </div>
               </FadeIn>
             ))}
           </div>
           <FadeIn delay={0.4}>
             <div className="text-center mt-12">
-              <Button variant="hero" size="lg">
+              <button
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-[#0d1b3e] hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-[#c9a84c]/20"
+                style={{ background: "linear-gradient(135deg, #f0d080, #c9a84c)" }}
+              >
                 Become a Member <ArrowRight size={16} />
-              </Button>
+              </button>
             </div>
           </FadeIn>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-[#0d1b3e]">
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="text-center mb-14">
-              <span className="text-secondary text-sm font-semibold tracking-widest uppercase mb-3 block">Testimonials</span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">What Members Say</h2>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase border border-[#c9a84c]/40 text-[#c9a84c] bg-[#c9a84c]/10 mb-4">Testimonials</span>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">What Members Say</h2>
             </div>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((item, i) => (
               <FadeIn key={item.name} delay={i * 0.1}>
-                <div className="p-6 rounded-xl bg-card border border-border hover-lift h-full flex flex-col">
-                  <Quote className="text-secondary/40 mb-4" size={28} />
-                  <p className="text-foreground text-sm leading-relaxed mb-6 italic flex-1">"{item.quote}"</p>
+                <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
+                  <Quote style={{ color: "#c9a84c", opacity: 0.5 }} className="mb-4" size={28} />
+                  <p className="text-white/65 text-sm leading-relaxed mb-6 italic flex-1">"{item.quote}"</p>
                   <div>
-                    <div className="font-semibold text-foreground text-sm">{item.name}</div>
-                    <div className="text-xs text-muted-foreground">{item.role}</div>
+                    <div className="font-semibold text-white text-sm">{item.name}</div>
+                    <div className="text-xs text-white/40">{item.role}</div>
                   </div>
                 </div>
               </FadeIn>

@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FileText, Microscope, Handshake, Database, Search, ExternalLink, ArrowRight } from "lucide-react";
 
@@ -48,24 +47,24 @@ export default function Research() {
       <PageHeader tag="Research" title="Advancing Knowledge" description="Explore our research publications, ongoing projects, and global collaborations." />
 
       {/* Publications */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-[#0d1b3e]">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <FileText className="text-secondary" size={20} />
-                  <span className="text-secondary text-sm font-semibold tracking-widest uppercase">Publications</span>
+                  <FileText style={{ color: "#c9a84c" }} size={20} />
+                  <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#c9a84c" }}>Publications</span>
                 </div>
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">Research Repository</h2>
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">Research Repository</h2>
               </div>
               <div className="relative w-full md:w-72">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
-                <Input
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={16} />
+                <input
                   placeholder="Search publications..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9"
+                  className="w-full pl-9 pr-4 py-2 rounded-lg bg-white/8 border border-white/15 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-[#c9a84c]/50"
                 />
               </div>
             </div>
@@ -74,48 +73,50 @@ export default function Research() {
           <div className="space-y-4">
             {filteredPublications.map((pub, i) => (
               <FadeIn key={pub.title} delay={i * 0.05}>
-                <div className="p-5 rounded-xl bg-card border border-border hover-lift flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div className="p-5 rounded-xl border border-white/10 bg-white/5 hover:-translate-y-0.5 transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">{pub.title}</h3>
-                    <p className="text-sm text-muted-foreground">{pub.authors} · <span className="text-secondary">{pub.journal}</span> · {pub.year}</p>
+                    <h3 className="font-semibold text-white mb-1">{pub.title}</h3>
+                    <p className="text-sm text-white/50">{pub.authors} · <span style={{ color: "#c9a84c" }}>{pub.journal}</span> · {pub.year}</p>
                   </div>
-                  <Button variant="ghost" size="sm" className="shrink-0 self-start md:self-center">
+                  <button className="shrink-0 self-start md:self-center flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors">
                     <ExternalLink size={14} /> View
-                  </Button>
+                  </button>
                 </div>
               </FadeIn>
             ))}
             {filteredPublications.length === 0 && (
-              <p className="text-center text-muted-foreground py-8">No publications found matching your search.</p>
+              <p className="text-center text-white/40 py-8">No publications found matching your search.</p>
             )}
           </div>
         </div>
       </section>
 
       {/* Projects */}
-      <section className="section-padding bg-muted/50">
+      <section className="section-padding" style={{ background: "#091529" }}>
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="flex items-center gap-2 mb-2">
-              <Microscope className="text-secondary" size={20} />
-              <span className="text-secondary text-sm font-semibold tracking-widest uppercase">Projects</span>
+              <Microscope style={{ color: "#c9a84c" }} size={20} />
+              <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#c9a84c" }}>Projects</span>
             </div>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-10">Research Projects</h2>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-10">Research Projects</h2>
           </FadeIn>
 
           <div className="grid md:grid-cols-2 gap-6">
             {projects.map((project, i) => (
               <FadeIn key={project.title} delay={i * 0.1}>
-                <div className="p-6 rounded-xl bg-card border border-border hover-lift h-full">
+                <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:-translate-y-1 transition-all duration-300 h-full">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-serif text-lg font-semibold text-foreground">{project.title}</h3>
+                    <h3 className="font-serif text-lg font-semibold text-white">{project.title}</h3>
                     <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
-                      project.status === "Ongoing" ? "bg-secondary/15 text-secondary" : "bg-accent text-accent-foreground"
+                      project.status === "Ongoing"
+                        ? "bg-[#c9a84c]/15 text-[#c9a84c]"
+                        : "bg-white/10 text-white/60"
                     }`}>
                       {project.status}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
+                  <p className="text-sm text-white/50 leading-relaxed">{project.description}</p>
                 </div>
               </FadeIn>
             ))}
@@ -124,19 +125,19 @@ export default function Research() {
       </section>
 
       {/* Collaborations */}
-      <section className="section-padding bg-background">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="section-padding bg-[#0d1b3e] text-center">
+        <div className="max-w-5xl mx-auto">
           <FadeIn>
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Handshake className="text-secondary" size={20} />
-              <span className="text-secondary text-sm font-semibold tracking-widest uppercase">Collaborations</span>
+              <Handshake style={{ color: "#c9a84c" }} size={20} />
+              <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#c9a84c" }}>Collaborations</span>
             </div>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-10">Global Research Partners</h2>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-10">Global Research Partners</h2>
           </FadeIn>
           <FadeIn delay={0.2}>
             <div className="flex flex-wrap justify-center gap-4">
               {collaborators.map((c) => (
-                <span key={c} className="px-5 py-3 rounded-lg bg-card border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-secondary/30 transition-colors">
+                <span key={c} className="px-5 py-3 rounded-lg border border-white/10 bg-white/5 text-sm font-medium text-white/60 hover:text-white hover:border-[#c9a84c]/40 transition-colors">
                   {c}
                 </span>
               ))}
@@ -146,16 +147,19 @@ export default function Research() {
       </section>
 
       {/* Resources CTA */}
-      <section className="section-padding bg-gradient-navy text-center">
+      <section className="section-padding text-center" style={{ background: "#091529" }}>
         <FadeIn>
-          <Database className="text-secondary mx-auto mb-4" size={32} />
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary-foreground mb-4">Research Resources</h2>
-          <p className="text-primary-foreground/60 text-lg max-w-xl mx-auto mb-8">
+          <Database style={{ color: "#c9a84c" }} className="mx-auto mb-4" size={32} />
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Research Resources</h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto mb-8">
             Access our growing database of research tools, datasets, and methodological guides.
           </p>
-          <Button variant="gold" size="lg">
+          <button
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-[#0d1b3e] hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-[#c9a84c]/20"
+            style={{ background: "linear-gradient(135deg, #f0d080, #c9a84c)" }}
+          >
             Access Resources <ArrowRight size={16} />
-          </Button>
+          </button>
         </FadeIn>
       </section>
     </PageLayout>

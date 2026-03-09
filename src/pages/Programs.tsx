@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
-import { Button } from "@/components/ui/button";
 import { GraduationCap, FlaskConical, Wrench, Award, Clock, Users, CheckCircle, ArrowRight } from "lucide-react";
 
 const programs = [
@@ -59,7 +58,7 @@ export default function Programs() {
     <PageLayout>
       <PageHeader tag="Programs" title="Your Learning Journey" description="Explore our carefully designed programs that blend academic rigor with real-world application." />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-[#0d1b3e]">
         <div className="max-w-6xl mx-auto space-y-20">
           {programs.map((program, i) => (
             <FadeIn key={program.title}>
@@ -67,54 +66,58 @@ export default function Programs() {
                 {/* Info */}
                 <div className={i % 2 !== 0 ? "lg:order-2" : ""}>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
-                      <program.icon className="text-primary" size={24} />
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "rgba(201,168,76,0.15)" }}>
+                      <program.icon style={{ color: "#c9a84c" }} size={24} />
                     </div>
                     <div>
-                      <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground">{program.title}</h2>
+                      <h2 className="font-serif text-2xl md:text-3xl font-bold text-white">{program.title}</h2>
                     </div>
                   </div>
                   <div className="flex gap-4 mb-5">
-                    <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5 text-sm text-white/50">
                       <Clock size={14} /> {program.duration}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5 text-sm text-white/50">
                       <Users size={14} /> {program.mode}
                     </span>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed mb-6">{program.description}</p>
-                  <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider mb-3">Key Highlights</h4>
+                  <p className="text-white/55 leading-relaxed mb-6">{program.description}</p>
+                  <h4 className="font-semibold text-white text-sm uppercase tracking-wider mb-3">Key Highlights</h4>
                   <ul className="space-y-2 mb-6">
                     {program.highlights.map((h) => (
-                      <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle className="text-secondary shrink-0 mt-0.5" size={14} />
+                      <li key={h} className="flex items-start gap-2 text-sm text-white/55">
+                        <CheckCircle style={{ color: "#c9a84c" }} className="shrink-0 mt-0.5" size={14} />
                         {h}
                       </li>
                     ))}
                   </ul>
-                  <Button variant="hero" asChild>
-                    <a href="/contact">Register Now <ArrowRight size={14} /></a>
-                  </Button>
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-[#0d1b3e] hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-[#c9a84c]/20"
+                    style={{ background: "linear-gradient(135deg, #f0d080, #c9a84c)" }}
+                  >
+                    Register Now <ArrowRight size={14} />
+                  </a>
                 </div>
 
                 {/* Curriculum */}
                 <div className={i % 2 !== 0 ? "lg:order-1" : ""}>
-                  <div className="p-8 rounded-2xl bg-muted/50 border border-border">
-                    <h4 className="font-serif text-lg font-semibold text-foreground mb-5">Curriculum Overview</h4>
+                  <div className="p-8 rounded-2xl border border-white/10 bg-white/5">
+                    <h4 className="font-serif text-lg font-semibold text-white mb-5">Curriculum Overview</h4>
                     <div className="space-y-4">
                       {program.curriculum.map((module, idx) => (
                         <div key={module} className="flex items-center gap-3">
-                          <span className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-xs font-bold text-primary shrink-0">
+                          <span className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold shrink-0" style={{ background: "rgba(201,168,76,0.18)", color: "#c9a84c" }}>
                             {String(idx + 1).padStart(2, "0")}
                           </span>
-                          <span className="text-sm text-foreground">{module}</span>
+                          <span className="text-sm text-white/70">{module}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
-              {i < programs.length - 1 && <div className="border-b border-border mt-16" />}
+              {i < programs.length - 1 && <div className="border-b border-white/10 mt-16" />}
             </FadeIn>
           ))}
         </div>

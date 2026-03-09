@@ -2,8 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { FileText, BookOpen, Video, Search, ArrowRight, ExternalLink, Tag } from "lucide-react";
 
 type ContentType = "all" | "article" | "paper" | "video";
@@ -54,26 +52,35 @@ export default function KnowledgeHub() {
     <PageLayout>
       <PageHeader tag="Knowledge Hub" title="Explore & Learn" description="Access our curated library of articles, research papers, and educational videos." />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-[#0d1b3e]">
         <div className="max-w-6xl mx-auto">
           {/* Filters */}
           <FadeIn>
             <div className="flex flex-col md:flex-row gap-4 justify-between mb-10">
               <div className="flex gap-2 flex-wrap">
                 {filters.map((f) => (
-                  <Button
+                  <button
                     key={f.value}
-                    variant={filter === f.value ? "hero" : "outline"}
-                    size="sm"
                     onClick={() => setFilter(f.value)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      filter === f.value
+                        ? "text-[#0d1b3e] shadow-lg"
+                        : "border border-white/15 bg-white/5 text-white/60 hover:text-white hover:border-white/30"
+                    }`}
+                    style={filter === f.value ? { background: "linear-gradient(135deg, #f0d080, #c9a84c)" } : {}}
                   >
                     {f.label}
-                  </Button>
+                  </button>
                 ))}
               </div>
               <div className="relative w-full md:w-72">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
-                <Input placeholder="Search resources..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={16} />
+                <input
+                  placeholder="Search resources..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2 rounded-lg bg-white/8 border border-white/15 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-[#c9a84c]/50"
+                />
               </div>
             </div>
           </FadeIn>
@@ -84,25 +91,25 @@ export default function KnowledgeHub() {
               const Icon = typeIcon[item.type];
               return (
                 <FadeIn key={item.title} delay={i * 0.05}>
-                  <div className="group p-6 rounded-xl bg-card border border-border hover-lift h-full flex flex-col">
+                  <div className="group p-6 rounded-xl border border-white/10 bg-white/5 hover:-translate-y-1 hover:border-white/20 transition-all duration-300 h-full flex flex-col">
                     <div className="flex items-center gap-2 mb-3">
-                      <Icon className="text-secondary" size={16} />
-                      <span className="text-xs font-medium text-secondary">{typeLabel[item.type]}</span>
-                      <span className="ml-auto text-xs text-muted-foreground">{item.date}</span>
+                      <Icon style={{ color: "#c9a84c" }} size={16} />
+                      <span className="text-xs font-medium" style={{ color: "#c9a84c" }}>{typeLabel[item.type]}</span>
+                      <span className="ml-auto text-xs text-white/35">{item.date}</span>
                     </div>
-                    <h3 className="font-serif text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-4">{item.description}</p>
+                    <h3 className="font-serif text-lg font-semibold text-white mb-2 group-hover:text-[#c9a84c] transition-colors">{item.title}</h3>
+                    <p className="text-sm text-white/50 leading-relaxed flex-1 mb-4">{item.description}</p>
                     <div className="flex items-center justify-between">
-                      <div className="flex gap-1.5">
+                      <div className="flex gap-1.5 flex-wrap">
                         {item.tags.map((tag) => (
-                          <span key={tag} className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-accent text-accent-foreground text-[10px] font-medium">
+                          <span key={tag} className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-[#c9a84c]/12 text-[#c9a84c]">
                             <Tag size={8} />{tag}
                           </span>
                         ))}
                       </div>
-                      <Button variant="ghost" size="sm" className="p-1 h-auto">
+                      <button className="p-1 text-white/40 hover:text-white transition-colors">
                         <ExternalLink size={14} />
-                      </Button>
+                      </button>
                     </div>
                   </div>
                 </FadeIn>
@@ -111,7 +118,7 @@ export default function KnowledgeHub() {
           </div>
 
           {filtered.length === 0 && (
-            <p className="text-center text-muted-foreground py-12">No resources found. Try a different search or filter.</p>
+            <p className="text-center text-white/40 py-12">No resources found. Try a different search or filter.</p>
           )}
         </div>
       </section>

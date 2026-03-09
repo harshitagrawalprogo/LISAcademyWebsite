@@ -2,9 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Clock, Send } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -58,34 +55,37 @@ export default function Contact() {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
+  const inputClass = "w-full px-4 py-2.5 rounded-lg bg-white/8 border border-white/15 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-[#c9a84c]/50 transition-colors";
+  const labelClass = "text-sm font-medium text-white/70 mb-1.5 block";
+
   return (
     <PageLayout>
       <PageHeader tag="Contact" title="Get in Touch" description="Have questions? We'd love to hear from you. Reach out to us anytime." />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-[#0d1b3e]">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Contact Info */}
             <div className="lg:col-span-2">
               <FadeIn>
-                <h2 className="font-serif text-2xl font-bold text-foreground mb-6">Contact Information</h2>
+                <h2 className="font-serif text-2xl font-bold text-white mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   {contactInfo.map((item) => (
                     <div key={item.label} className="flex gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                        <item.icon className="text-primary" size={18} />
+                      <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: "rgba(201,168,76,0.15)" }}>
+                        <item.icon style={{ color: "#c9a84c" }} size={18} />
                       </div>
                       <div>
-                        <div className="text-sm font-medium text-foreground">{item.label}</div>
-                        <div className="text-sm text-muted-foreground">{item.value}</div>
+                        <div className="text-sm font-medium text-white">{item.label}</div>
+                        <div className="text-sm text-white/50">{item.value}</div>
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* Map placeholder */}
-                <div className="mt-10 rounded-xl bg-muted border border-border h-48 flex items-center justify-center">
-                  <span className="text-sm text-muted-foreground">📍 New Delhi, India</span>
+                <div className="mt-10 rounded-xl border border-white/10 bg-white/5 h-48 flex items-center justify-center">
+                  <span className="text-sm text-white/40">📍 New Delhi, India</span>
                 </div>
               </FadeIn>
             </div>
@@ -93,34 +93,44 @@ export default function Contact() {
             {/* Form */}
             <div className="lg:col-span-3">
               <FadeIn delay={0.1}>
-                <div className="p-8 rounded-2xl bg-card border border-border">
-                  <h2 className="font-serif text-2xl font-bold text-foreground mb-6">Send a Message</h2>
+                <div className="p-8 rounded-2xl border border-white/10 bg-white/5">
+                  <h2 className="font-serif text-2xl font-bold text-white mb-6">Send a Message</h2>
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="text-sm font-medium text-foreground mb-1.5 block">Name</label>
-                        <Input value={form.name} onChange={(e) => updateField("name", e.target.value)} placeholder="Your name" />
-                        {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
+                        <label className={labelClass}>Name</label>
+                        <input value={form.name} onChange={(e) => updateField("name", e.target.value)} placeholder="Your name" className={inputClass} />
+                        {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
                       </div>
                       <div>
-                        <label className="text-sm font-medium text-foreground mb-1.5 block">Email</label>
-                        <Input type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} placeholder="your@email.com" />
-                        {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
+                        <label className={labelClass}>Email</label>
+                        <input type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} placeholder="your@email.com" className={inputClass} />
+                        {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
                       </div>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-foreground mb-1.5 block">Subject</label>
-                      <Input value={form.subject} onChange={(e) => updateField("subject", e.target.value)} placeholder="How can we help?" />
-                      {errors.subject && <p className="text-xs text-destructive mt-1">{errors.subject}</p>}
+                      <label className={labelClass}>Subject</label>
+                      <input value={form.subject} onChange={(e) => updateField("subject", e.target.value)} placeholder="How can we help?" className={inputClass} />
+                      {errors.subject && <p className="text-xs text-red-400 mt-1">{errors.subject}</p>}
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-foreground mb-1.5 block">Message</label>
-                      <Textarea value={form.message} onChange={(e) => updateField("message", e.target.value)} placeholder="Tell us more..." rows={5} />
-                      {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
+                      <label className={labelClass}>Message</label>
+                      <textarea
+                        value={form.message}
+                        onChange={(e) => updateField("message", e.target.value)}
+                        placeholder="Tell us more..."
+                        rows={5}
+                        className={inputClass + " resize-none"}
+                      />
+                      {errors.message && <p className="text-xs text-red-400 mt-1">{errors.message}</p>}
                     </div>
-                    <Button variant="hero" type="submit" className="w-full sm:w-auto">
+                    <button
+                      type="submit"
+                      className="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-semibold text-sm text-[#0d1b3e] hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-[#c9a84c]/20"
+                      style={{ background: "linear-gradient(135deg, #f0d080, #c9a84c)" }}
+                    >
                       Send Message <Send size={14} />
-                    </Button>
+                    </button>
                   </form>
                 </div>
               </FadeIn>
